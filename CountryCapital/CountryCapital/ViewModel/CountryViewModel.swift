@@ -12,6 +12,7 @@ class CountryViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var isLoading = false
     @Published var error: CountryFetchError?
+    private var hasFetched = false
     let networkService = NetworkService()
     
     var filteredCountries: [Country] {
@@ -26,6 +27,9 @@ class CountryViewModel: ObservableObject {
     }
     
     func getAllCountries() {
+        guard !hasFetched else { return }
+        hasFetched = true
+
         isLoading = true
         networkService.fetchCountries { data, error in
             if let error = error {
