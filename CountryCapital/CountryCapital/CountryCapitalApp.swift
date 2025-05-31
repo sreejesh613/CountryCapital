@@ -11,7 +11,16 @@ import SwiftUI
 struct CountryCapitalApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView(viewModel: CountryViewModel())
+            MainView(viewModel: makeViewModel())
         }
     }
+}
+
+func makeViewModel() -> CountryViewModel {
+    let viewModel = CountryViewModel()
+    viewModel.locationManager.onCountryDetected = { countryCode in
+        //Closure instantiation
+        viewModel.handleDetectedCountryCode(countryCode)
+    }
+    return viewModel
 }
