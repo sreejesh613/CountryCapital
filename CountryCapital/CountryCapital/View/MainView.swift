@@ -21,14 +21,16 @@ struct MainView: View {
                         if !viewModel.mainCountries.isEmpty {
                             Section(header: Text("My Countries")) {
                                 ForEach(viewModel.mainCountries) { country in
-                                    VStack(alignment: .leading) {
-                                        Text(country.name)
-                                        Text("Capital: \(country.capital ?? "N/A")")
-                                        Text("Currency: \(country.currencies?.first?.name ?? "N/A")")
-                                    }
-                                    .contextMenu {
-                                        Button("Remove", role: .destructive) {
-                                            viewModel.removeFromMainCountries(country: country)
+                                    NavigationLink(destination: DetailView(country: country)) {
+                                        VStack(alignment: .leading) {
+                                            Text(country.name)
+                                            Text("Capital: \(country.capital ?? "N/A")")
+                                            Text("Currency: \(country.currencies?.first?.name ?? "N/A")")
+                                        }
+                                        .contextMenu {
+                                            Button("Remove", role: .destructive) {
+                                                viewModel.removeFromMainCountries(country: country)
+                                            }
                                         }
                                     }
                                 }
