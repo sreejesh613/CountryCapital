@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var viewModel: CountryViewModel
+    @StateObject var locationManager: LocationManager
 
     var body: some View {
         NavigationStack {
@@ -53,6 +54,16 @@ struct MainView: View {
                     }
                 }
             }
+            .onReceive(locationManager.$countryCode.compactMap { $0 }) { code in
+                if let country = viewModel.allContries.first(where: { $0.alpha2Code == code }) {
+                    viewModel.addToMainCountry(country: country)
+                } else {
+                    //Fallback to India
+                    if let fallback = viewModel.allContries.first(where: { $0.alpha2Code == "IN" }) {
+                        viewModel.addToMainCountry(country: fallback)
+                    }
+                }
+            }
             .onAppear {
                 viewModel.getAllCountries()
             }
@@ -75,5 +86,5 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView(viewModel: CountryViewModel())
+    MainView(viewModel: CountryViewModel(), locationManager: LocationManager())
 }
