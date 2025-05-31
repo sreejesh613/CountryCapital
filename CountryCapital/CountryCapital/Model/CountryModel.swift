@@ -7,7 +7,6 @@
 import Foundation
 
 struct Country: Decodable, Identifiable {
-    var id: UUID = UUID()
     let name: String
     let topLevelDomain: [String]?
     let alpha2Code: String
@@ -23,6 +22,8 @@ struct Country: Decodable, Identifiable {
     let currencies: [Currency]?
     let languages: [Language]?
     let flags: FlagImages?
+    
+    let id = UUID()
 }
 struct Currency: Decodable {
     let code: String?
