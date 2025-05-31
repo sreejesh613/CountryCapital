@@ -10,30 +10,43 @@ import CoreLocation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var manager = CLLocationManager()
-    @Published var countryCode: String?
+    var onCountryDetected: ((_ country: String?) -> Void)?
     
     override init() {
         super.init()
         manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         manager.requestWhenInUseAuthorization()
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.requestLocation()
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.requestLocation()
+        case .denied, .restricted:
+            print("Location access denied")
+        default:
+            break
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else { return }
-        
+        guard let location = locations.first else {
+            self.onCountryDetected?(nil)
+            return
+        }
+
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
             if let code = placemarks?.first?.isoCountryCode {
                 DispatchQueue.main.async {
-                    self?.countryCode = code
+                    self?.onCountryDetected?(code)
                 }
             }
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
-        print("Failed to fetch location: \(error.localizedDescription)")
+        self.onCountryDetected?(nil)
     }
 }
