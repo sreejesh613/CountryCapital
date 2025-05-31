@@ -23,7 +23,25 @@ struct Country: Decodable, Identifiable {
     let languages: [Language]?
     let flags: FlagImages?
     
-    let id = UUID()
+    public let id = UUID()
+    
+    public init(name: String, topLevelDomain: [String]?, alpha2Code: String, alpha3Code: String, capital: String?, region: String?, subregion: String?, population: Int?, area: Double?, nativeName: String?, flag: String?, latlng: [Double]?, currencies: [Currency]?, languages: [Language]?, flags: FlagImages?) {
+        self.name = name
+        self.topLevelDomain = topLevelDomain
+        self.alpha2Code = alpha2Code
+        self.alpha3Code = alpha3Code
+        self.capital = capital
+        self.region = region
+        self.subregion = subregion
+        self.population = population
+        self.area = area
+        self.nativeName = nativeName
+        self.flag = flag
+        self.latlng = latlng
+        self.currencies = currencies
+        self.languages = languages
+        self.flags = flags
+    }
 }
 struct Currency: Decodable {
     let code: String?

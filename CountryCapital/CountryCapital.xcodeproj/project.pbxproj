@@ -65,15 +65,11 @@
 		};
 		05B2817A2DEAEF7C005792DF /* CountryCapitalTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = CountryCapitalTests;
 			sourceTree = "<group>";
 		};
 		05B281842DEAEF7C005792DF /* CountryCapitalUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = CountryCapitalUITests;
 			sourceTree = "<group>";
 		};
@@ -149,7 +145,6 @@
 				AD4FABC0B6AE704DB6FEFA15 /* Pods-CountryCapitalTests.debug.xcconfig */,
 				B8464351A9149A131A6187D7 /* Pods-CountryCapitalTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -344,9 +339,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CountryCapitalTests/Pods-CountryCapitalTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CountryCapitalTests/Pods-CountryCapitalTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -383,9 +382,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CountryCapital-CountryCapitalUITests/Pods-CountryCapital-CountryCapitalUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CountryCapital-CountryCapitalUITests/Pods-CountryCapital-CountryCapitalUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
