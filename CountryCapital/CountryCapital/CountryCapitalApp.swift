@@ -11,7 +11,7 @@ import SwiftUI
 struct CountryCapitalApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView(viewModel: CountryViewModel())
         }
     }
 }
